@@ -22,9 +22,11 @@ const Styles = styled.div`
 export const NavigationBar = () => (
   <Styles>
     <Navbar expand='lg'>
-      <Navbar.Brand href='/'>
-        <img src={logo} alt='Americas-Alliance-network-logo'></img>
-      </Navbar.Brand>
+      <Link to='/'>
+        <Navbar.Brand>
+          <img src={logo} alt='Americas-Alliance-network-logo'></img>
+        </Navbar.Brand>
+      </Link>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto'>

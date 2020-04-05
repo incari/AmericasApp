@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './containers/Home';
 import About from './containers/About';
 import Contact from './containers/Contact';
-import Admin from './containers/Admin';
+import { Admin } from './containers/Admin';
 import NotFound from './containers/NotFound';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
