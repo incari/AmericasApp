@@ -1,30 +1,52 @@
 import React from 'react';
-import Volumetric from './Volumetric';
-import { Form, Col, Row } from 'react-bootstrap';
-import { Container, Button } from 'react-bootstrap';
+import Select from 'react-select';
+import Async from 'react-select/async';
+import { from, to } from '../containers/Admin';
+import { Form, Col, Row, Button } from 'react-bootstrap';
 
-class QuotationForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '' };
+// const departure = ['1', '3', '2'];
+// const arrival = ['12', '33', '23'];
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const QuotationForm = () => {
+  const options = [];
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit(event) {
+  const handleSubmit = event => {
     event.preventDefault();
-  }
-  render() {
-    return (
-      <>
-        <Volumetric></Volumetric>
-      </>
-    );
-  }
-}
+    console.log(event.target); // or directly
+  };
+  return (
+    <>
+      <Form onSubmit={handleSubmit} className='text-center'>
+        <Row>
+          <Col>
+            <Select name='from' options={from} placeholder='Select city' />
+          </Col>
+          <Col>
+            <Select name='to' options={to} placeholder='Select city' />
+          </Col>
+        </Row>
+        <Form.Row>
+          <Form.Group as={Col} name='weight'>
+            <Form.Label>Weight</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Weight in Kg'
+              required
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group as={Col} name='volume'>
+            <Form.Label>Volume</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Volume in m3'
+              required
+            ></Form.Control>
+          </Form.Group>
+        </Form.Row>
+        <Button type='submit'>Get quotation</Button>
+      </Form>
+    </>
+  );
+};
+
 export default QuotationForm;

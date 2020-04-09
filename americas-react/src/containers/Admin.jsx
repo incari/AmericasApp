@@ -9,6 +9,8 @@ let headings = [];
 let rows = [[]];
 let departure = [];
 let arrival = [];
+let from = [];
+let to = [];
 
 class Admin extends Component {
   render() {
@@ -26,11 +28,19 @@ class Admin extends Component {
         }
       }
       for (let i = 1; i < data.length; i++) {
-        departure.push(data[i][0]);
-        arrival.push(data[i][1]);
+        departure.push(data[i][0], data[i][0]);
+        arrival.push(data[i][1], data[i][1]);
       }
+
       departure = [...new Set(departure)];
       arrival = [...new Set(arrival)];
+      for (let i = 0; i < departure.length; i++) {
+        from.push({ value: departure[i], label: departure[i] });
+      }
+      for (let i = 0; i < arrival.length; i++) {
+        to.push({ value: arrival[i], label: arrival[i] });
+      }
+
       this.forceUpdate();
     };
 
@@ -46,4 +56,4 @@ class Admin extends Component {
     );
   }
 }
-export { Admin, departure, arrival };
+export { Admin, from, to };

@@ -3,72 +3,79 @@ import Cities from './Cities';
 import { FormControl, InputGroup, Row, Col, Form } from 'react-bootstrap';
 import { Container, Button } from 'react-bootstrap';
 
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+//import { departure, arrival } from '../containers/Admin';
+const departure = ['1', '2', '3'];
+const arrival = ['a', 'b', 'c'];
+
 class Volumetric extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      departure: [],
+      value: ''
+    };
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-    console.log(event.target.value);
-  }
+  handleChange = e => {
+    this.setState({ value: e.target.value });
+    console.log(e.target.value);
+  };
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    console.log(this.state);
     event.preventDefault();
   }
-
   render() {
+    const { departure } = this.state;
+
+    let citiesList =
+      departure.length > 0 &&
+      departure.map(x => {
+        return <option>{x}</option>;
+      }, this);
+
     return (
       <>
-        <Form onSubmit={this.handleSubmit}>
-          <Cities />
-          <Row>
-            <Col>
-              <InputGroup className='mb-3'>
-                <FormControl
-                  onChange={this.handleChange}
-                  value={this.state.value.weight}
-                  placeholder='Weight'
-                  type='number'
-                  name='weight'
-                />
-                <InputGroup.Append>
-                  <InputGroup.Text>Kg</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-            </Col>
+        <Form>
+          <Form.Row>
+            <Form.Group as={Col} controlId='From'>
+              <Form.Label>From</Form.Label>
+              <Form.Control as='select' value={this.state.value}>
+                {citiesList}
+              </Form.Control>
+            </Form.Group>
 
-            <Col>
-              <InputGroup className='mb-3'>
-                <InputGroup.Prepend></InputGroup.Prepend>
-                <FormControl
-                  value={this.state.value.volume}
-                  onChange={this.handleChange}
-                  placeholder='Volume'
-                  type='number'
-                />
-                <InputGroup.Append>
-                  <InputGroup.Text>m3</InputGroup.Text>
-                </InputGroup.Append>
-              </InputGroup>
-            </Col>
-          </Row>
+            <Form.Group as={Col} controlId='To'>
+              {/* <Dropdown
+                class='form control'
+                options={arrival}
+                onChange={this._onSelect}
+                placeholder='Select an option'
+              ></Dropdown> */}
+            </Form.Group>
+          </Form.Row>
 
-          <Row className='justify-content-center' style={{ margin: '20px' }}>
-            <Button
-              onClick={this.handleSubmit}
-              variant='primary'
-              size='lg'
-              active
-            >
-              Get Quotation
-            </Button>
-          </Row>
+          <Form.Row>
+            <Form.Group as={Col} controlId='Weight'>
+              <Form.Label>Weigth</Form.Label>
+              <Form.Control placeholder='Weight in Kg' />
+            </Form.Group>
+
+            <Form.Group as={Col} controlId='Volume'>
+              <Form.Label>Volume</Form.Label>
+              <Form.Control placeholder='Volume in m3' />
+            </Form.Group>
+          </Form.Row>
+
+          <Form.Group id='formGridCheckbox'>
+            <Form.Check type='checkbox' label='Check me out' />
+          </Form.Group>
+
+          <Button variant='primary' type='submit'>
+            Submit
+          </Button>
         </Form>
       </>
     );
