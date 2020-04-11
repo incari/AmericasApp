@@ -11,7 +11,7 @@ export const Measure = props => {
           </InputGroup.Prepend>
           <FormControl lg='5' aria-label='Default' type='number' />
           <InputGroup.Append>
-            <InputGroup.Text>{unit[0]} </InputGroup.Text>
+            <InputGroup.Text> </InputGroup.Text>
           </InputGroup.Append>
         </InputGroup>
       </Col>

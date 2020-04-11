@@ -1,21 +1,16 @@
 language: node_js
+node_js:
+  - 'stable'
 cache:
   directories:
-    - ~/.npm
-node_js:
-  - '12'
-git:
-  depth: 3
+    - node_modules
 script:
-  - yarn build
+  - npm test
+  - npm run build
 deploy:
-  provider: pages
-  edge: true,
-  skip-cleanup: true
-  keep-history: true
-  github-token: $GITHUB_TOKEN
-  local-dir: dist/
-  target-brach: gh-pages
-  commit_message: 'Deploy Release'
-  on:
-    branch: master
+  provider: surge
+  skip_cleanup: true
+  domain: incari.surge.sh
+  project: ./build/
+on:
+  branch: master
