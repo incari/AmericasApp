@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from 'react';
 import Select from 'react-select';
 import Async from 'react-select/async';
@@ -12,11 +13,10 @@ const QuotationForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(event.target); // or directly
   };
   return (
     <>
-      <Form onSubmit={handleSubmit} className='text-center'>
+      <Form onSubmit={handleSubmit}>
         <Row>
           <Col>
             <Select name='from' options={from} placeholder='Select city' />
